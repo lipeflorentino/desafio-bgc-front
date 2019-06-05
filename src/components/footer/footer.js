@@ -9,10 +9,11 @@ import './stylesheet/footer.scss';
     
 //Footer
 const Footer = () => (
-  <div>
-      
-    
-  </div>  
+  <footer>
+      <div className="ft-copyright">
+            <p>Copyright@ 2019 MinionStore </p>
+        </div>
+  </footer>  
 );
 
 export default Footer;

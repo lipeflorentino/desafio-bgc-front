@@ -11,27 +11,28 @@ import img from './img/minions2.png';
 
 
 class LoginContent extends Component {
-  render() {
-    return (
-        <div id="login-content">
-            <img src={img} className="app-logo" alt="logo"></img>
-            <div class="row login-form">
-                <form class="col s12">
-                    <div class="input-field col s12">
-                        <input id="email" type="email" class="validate"></input>
-                        <label for="email">Email</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input id="password" type="password" class="validate"></input>
-                        <label for="password">Password</label>
-                    </div>
-                  <Link className="waves-effect waves-light btn" to="/login">Entrar</Link>
-                  
-                </form>
-              </div>
-        </div>   
-    );
-  }
+    
+    render() {
+        return (
+            <div id="login-content">
+                <img src={img} className="app-logo" alt="logo"></img>
+                <div className="row login-form">
+                    <form className="col s12">
+                        <div className="input-field col s12">
+                            <input id="email" type="email" className="validate"></input>
+                            <label htmlFor="email">Email</label>
+                        </div>
+                        <div className="input-field col s12">
+                            <input id="password" type="password" className="validate"></input>
+                            <label htmlFor="password">Password</label>
+                        </div>
+                      <Link className="waves-effect waves-light btn" to="/login">Entrar</Link>
+                      
+                    </form>
+                  </div>
+            </div>   
+        );
+    }
 }
 
 export default LoginContent;

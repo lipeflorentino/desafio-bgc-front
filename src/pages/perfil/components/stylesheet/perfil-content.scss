@@ -1,0 +1,41 @@
+$medium-gray:#5a5a5a;
+
+#perfil-content{
+    min-height:100vh;
+    padding:8% 15%;
+}
+
+.pc-infos{
+    width:100%;
+    height:35vh;
+    margin-bottom:0;
+    img{
+        height:20vh;
+        float:left;
+    }
+}
+.pc-infos-text{
+    width:60%;
+    float:left;
+    padding-left:40px;
+    p{
+        font-size:14px;
+        line-height:.8rem;
+    }
+    strong{
+        color:yellow;
+    }
+}
+.pc-tables{
+    color:white;
+    background-color:$medium-gray;
+    padding:4%;
+    h1{
+        margin-top:0;
+        padding-top:0;
+        color:white;
+    }
+    th{
+        color:yellow;
+    }
+}
