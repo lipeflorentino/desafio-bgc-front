@@ -37,7 +37,8 @@ class LojaContent extends Component {
                         <Col s={12} m={3}>
                             <div className="lc-box">
                                 <div className="lc-top-icons">
-                                
+                                    <i class="material-icons i-left">add</i>
+                                    <i class="material-icons i-right">favorite_border</i>
                                 </div>
                                 <img src={img2} title="" alt=""></img>
                             </div>
@@ -45,7 +46,8 @@ class LojaContent extends Component {
                         <Col s={12} m={3}>
                             <div className="lc-box">
                                 <div className="lc-top-icons">
-                                
+                                    <i class="material-icons i-left">add</i>
+                                    <i class="material-icons i-right">favorite_border</i>
                                 </div>
                                 <img src={img3} title="" alt=""></img>
                             </div>
@@ -53,7 +55,8 @@ class LojaContent extends Component {
                         <Col s={12} m={3}>
                             <div className="lc-box">
                                 <div className="lc-top-icons">
-                                
+                                    <a><i class="material-icons i-left">add</i></a>
+                                    <a><i class="material-icons i-right">favorite_border</i></a>
                                 </div>
                                 <img src={img4} title="" alt=""></img>
                             </div>    
