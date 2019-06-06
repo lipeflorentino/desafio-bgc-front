@@ -4,11 +4,22 @@ nav .nav-wrapper{
     background-color:transparent;
 }
 nav{
-    background-color:transparent;
+    background-color:black;
     padding:0 20px;
     box-shadow:none;
 }
 strong{
     color:yellow;
+}
+nav ul a:hover{
+    background-color:rgba(156, 160, 48, 0.1);
+}
+.li-cart{
+    i{
+        padding:0 13px;
+    }
+    span{
+        float:left;
+    }
 }
 

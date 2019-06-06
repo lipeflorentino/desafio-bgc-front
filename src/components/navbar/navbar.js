@@ -27,7 +27,7 @@ class Nav extends Component {
                   <ul className="right hide-on-med-and-down">
                     <li><Link to="/loja">Loja</Link></li>
                     <li><Link to="/perfil">Perfil</Link></li>
-                    <li><Link to="/carrinho">Carrinho</Link></li>
+                    <li className="li-cart"><Link to="/carrinho"><span> 1</span><i class="material-icons i-left">add_shopping_cart</i></Link></li>
                     <li><Link to="/logout">Logout</Link></li>
                   </ul>
                   <ul className="side-nav" id="mobile-demo">
