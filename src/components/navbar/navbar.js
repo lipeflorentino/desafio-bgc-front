@@ -23,11 +23,11 @@ class Nav extends Component {
               <nav>
                 <div className="nav-wrapper">
                   <a href="/" className="brand-logo">{icon}</a>
-                  <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+                  <a href="#1" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
                   <ul className="right hide-on-med-and-down">
                     <li><Link to="/loja">Loja</Link></li>
                     <li><Link to="/perfil">Perfil</Link></li>
-                    <li className="li-cart"><Link to="/carrinho"><span> 1</span><i class="material-icons i-left">add_shopping_cart</i></Link></li>
+                    <li className="li-cart"><Link to="/carrinho"><span> 1</span><i className="material-icons i-left">add_shopping_cart</i></Link></li>
                     <li><Link to="/logout">Logout</Link></li>
                   </ul>
                   <ul className="side-nav" id="mobile-demo">

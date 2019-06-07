@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <div id="app-container">
           <header className="app-header">
-            <h1>Minion<yellow>Store</yellow></h1>
+            <h1>Minion<strong>Store</strong></h1>
             <img src={img} className="app-logo" alt="logo"></img>
             <p>A sua loja oficial de minions!</p>
             <Link className="waves-effect waves-light btn" to="/login">Login</Link>

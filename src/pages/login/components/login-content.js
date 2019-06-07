@@ -30,6 +30,8 @@ class LoginContent extends Component {
                       <p className="p-cadastro">não tem conta? Faça aqui o <Link to="/cadastro">cadastro</Link></p>
                       
                     </form>
+                    <div id="snackbar">Valeu! Seu login foi efetuado com sucesso!</div>
+                    <div id="errorbar">Ocorreu um erro durante o envio, por favor tente novamente.</div>
                   </div>
             </div>   
         );
