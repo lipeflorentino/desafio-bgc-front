@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
         
 // Importando o components
-
+import fetch from 'cross-fetch';
 // Importando os components necessários da lib react-materialize
 import { Row, Col } from 'react-materialize';
 //import { Link } from 'react-router-dom';
@@ -12,10 +12,56 @@ import './stylesheet/perfil-content.scss';
 // Importando img
 import img from './img/user.png';
 
+//implementar getUserId da session
+const session_user_id = "aoiwjdq928";
+//const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/users/" + session_user_id;
+const api = "http://localhost:3000/users/" + session_user_id;
 
 class PerfilContent extends Component {
     
+    //constructor
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user: {},
+            isLoading: false,
+            error: null,
+        };
+    }
+    
+    //setando estado carregando e chamando function para pegar dados da api
+    componentDidMount() {        
+        this.setState({ isLoading: true });  
+        this.loadData();
+    }
+    
+    loadData = () => {
+        console.log("Loading Data...");
+        fetch(api)
+          .then(response => {
+            if (response) {
+              return response.json();
+            } else {
+              throw new Error('Something went wrong ...');
+            }
+          })
+          .then(data => this.setState({ user: data, isLoading: false  }))
+          .catch(error => this.setState({ error, isLoading: false }));
+    }
+    
     render() {
+        const { user, isLoading, error } = this.state;
+        
+        if (error) {
+          return <p>{error.message}</p>;
+        }
+        
+        if (isLoading) {
+            //icone de loading...
+            return <div className="loader"></div>;
+        }
+        
         return (
             <div id="perfil-content">
                 <Row>
@@ -24,16 +70,16 @@ class PerfilContent extends Component {
                             <img src={img} title="" alt=""></img>
                             <div className="pc-infos-text">
                                 <p><strong>Nome:</strong></p>
-                                <p>Fulano da Silva</p>
+                                <p>{user.nome}</p>
                                 <p><strong>Email:</strong></p> 
-                                <p>fulano@gmail.com</p>
+                                <p>{user.email}</p>
                             </div>
                         </div>
-                    </Col>    
+                    </Col> 
                     <Col s={12} m={12}>
                         <div className="pc-tables">
                             <h1>Registros</h1>
-                            <table class="highlight responsive-table">
+                            <table className="highlight responsive-table">
                                 <thead>
                                   <tr>
                                       <th>Data</th>
