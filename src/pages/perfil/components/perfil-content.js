@@ -59,7 +59,7 @@ class PerfilContent extends Component {
         
         if (isLoading) {
             //icone de loading...
-            return <div className="loader"></div>;
+            return <div className="loader-container"><div className="loader"></div></div>;
         }
         
         return (

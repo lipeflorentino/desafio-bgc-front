@@ -39,7 +39,9 @@ $medium-gray:#5a5a5a;
         color:yellow;
     }
 }
-
+.loader-container{
+    height:100vh;
+}
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */
@@ -47,7 +49,7 @@ $medium-gray:#5a5a5a;
   width: 60px;
   height: 60px;
   animation: spin 2s linear infinite;
-  margin: 20px 45%;
+  margin: 20% 45%;
 }
 
 @keyframes spin {

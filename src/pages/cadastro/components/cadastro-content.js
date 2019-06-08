@@ -14,8 +14,8 @@ import './stylesheet/cadastro-content.scss';
 import './stylesheet/snackbar.scss';
 // Importando img
 import img from './img/minions.png';
-const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/users/";
-//const api = "http://localhost:3000/users/";
+//const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/users/";
+const api = "http://localhost:3000/users/";
 
 class CadastroContent extends Component {
     
