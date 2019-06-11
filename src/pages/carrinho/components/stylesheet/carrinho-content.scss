@@ -7,6 +7,12 @@ $btn-sec-color:#b1dcfb;
 #carrinho-content{
     min-height:100vh;
     padding:8% 15%;
+    p.p-vazio{
+        margin:15% 0;
+        text-align:center;
+        font-style:italic;
+        color:yellow;
+    }
     h1{
         text-align:center;
     }

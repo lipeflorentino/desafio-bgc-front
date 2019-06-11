@@ -11,11 +11,14 @@ import { Row, Col } from 'react-materialize';
 import './stylesheet/perfil-content.scss';
 // Importando img
 import img from './img/user.png';
-
+// localstorage
+var localStorage = require('localStorage');
 //implementar getUserId da session
-const session_user_id = "aoiwjdq928";
+const session_user_id = localStorage.getItem("session_user_id");
+const session_user_email = localStorage.getItem("session_user_email");
 //const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/users/" + session_user_id;
 const api = "http://localhost:3000/users/" + session_user_id;
+const api_vendas = "http://localhost:3000/vendas/?email=" + session_user_email;
 
 class PerfilContent extends Component {
     
@@ -25,6 +28,7 @@ class PerfilContent extends Component {
 
         this.state = {
             user: {},
+            venda: [],
             isLoading: false,
             error: null,
         };
@@ -34,10 +38,10 @@ class PerfilContent extends Component {
     componentDidMount() {        
         this.setState({ isLoading: true });  
         this.loadData();
+        this.getVendas();
     }
     
     loadData = () => {
-        console.log("Loading Data...");
         fetch(api)
           .then(response => {
             if (response) {
@@ -50,8 +54,21 @@ class PerfilContent extends Component {
           .catch(error => this.setState({ error, isLoading: false }));
     }
     
+    getVendas = () => {
+        fetch(api_vendas)
+          .then(response => {
+            if (response) {
+              return response.json();
+            } else {
+              throw new Error('Something went wrong ...');
+            }
+          })
+          .then(data => this.setState({ venda: data.Vendas, isLoading: false  }))
+          .catch(error => this.setState({ error, isLoading: false }));
+    }
+    
     render() {
-        const { user, isLoading, error } = this.state;
+        const { user, venda, isLoading, error } = this.state;
         
         if (error) {
           return <p>{error.message}</p>;
@@ -90,24 +107,16 @@ class PerfilContent extends Component {
                                 </thead>
                         
                                 <tbody>
-                                  <tr>
-                                    <td>10/01/2019</td>
-                                    <td>2</td>
-                                    <td>Minion Bob, Minion Stuart</td>
-                                    <td>$49.87</td>
-                                  </tr>
-                                  <tr>
-                                    <td>30/04/2019</td>
-                                    <td>2</td>
-                                    <td>Minion Alex, Minion Stuart</td>
-                                    <td>$30.90</td>
-                                  </tr>
-                                  <tr>
-                                    <td>12/05/2019</td>
-                                    <td>4</td>
-                                    <td>Minion Frank, Minion Stuart, Minion Bob, Minion Stuart</td>
-                                    <td>$69.90</td>
-                                  </tr>
+                                    {
+                                        venda.map((n, key) =>
+                                          <tr key={key}>
+                                            <td>{n.data_venda}</td>
+                                            <td>{n.qtd_items}</td>
+                                            <td>{n.nome_items}</td>
+                                            <td>R$ {n.valor_total}</td>
+                                          </tr>
+                                        )  
+                                    }
                                 </tbody>
                               </table>    
                         </div>

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // Importando o components
 import { Link } from 'react-router-dom';
 import fetch from 'cross-fetch';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 // Importando os components necessários da lib react-materialize
 
 //import { Link } from 'react-router-dom';
@@ -114,7 +114,7 @@ class CadastroContent extends Component {
                             <input id="password" type="password" data-length="12" name="password" className="validate" required></input>
                             <label htmlFor="password">Senha</label>
                         </div>
-                      <button type="submit" className="waves-effect waves-light btn" to="/login">Enviar</button>
+                      <button type="submit" className="waves-effect waves-light btn">Enviar</button>
                       <p className="p-cadastro">já tem conta? Faça aqui o <Link to="/login">login</Link></p>
                     </form>
                     <div id="snackbar">Valeu! Já já entraremos em contato.</div>

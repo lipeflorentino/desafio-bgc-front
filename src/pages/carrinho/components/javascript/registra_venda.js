@@ -1,17 +1,24 @@
+//importando cross-fetch
 import fetch from 'cross-fetch';
+//importando funcao para envio de email
+import { enviarEmail } from './enviar_email.js';
+//importando funcao para fazer o checkout do carrinho
+import { checkoutCarrinho } from './checkout_carrinho.js';
 //function para chamar endpoint que registra venda
-export function registraVenda(list, e) {
+export function registraVenda(list, email, nome, carrinhoId, callback) {
             
+console.log('chamou registra venda!');            
+//declarando constantes
 const api_url = 'http://localhost:3000/vendas';      
-
-console.log('chamou registra venda!');
-var valor_total = 0;
 const qtd_items = list.length;
 const data_venda = new Date(Date.now());
+//declarando variaveis
+var valor_total = 0;
 var nome_items = '';
-
-var i;
-for (i = 0; i < list.length; ++i) {
+var i = 0;
+console.log('list: ' + list);
+//percorrendo a lista para setar valores
+for (i; i < list.length; ++i) {
     valor_total = valor_total + Number(list[i].preco);
     nome_items = nome_items + list[i].nome;
     if(i+1<list.length){
@@ -19,16 +26,10 @@ for (i = 0; i < list.length; ++i) {
     }
 }
 
-const email = e;
-
-console.log('email: ' + email);
-console.log('data venda: ' + data_venda);
-console.log('qtd_items: ' + qtd_items);
-console.log('items: ' + nome_items);
-console.log('valor total: ' + valor_total);
-
-const form = {'email': email, 'data_venda': data_venda, 'qtd_items': qtd_items, 'nome_items': nome_items, 'valor_total': valor_total};
-
+//setando dados para o body da requisicao
+const form = {'email': email, 'nome': nome, 'data_venda': data_venda, 'qtd_items': qtd_items, 'nome_items': nome_items, 'valor_total': valor_total};
+console.log('form: ' + JSON.stringify(form));
+//fetch api 
 fetch(api_url, { 
     method: 'post', 
     headers: {
@@ -40,10 +41,15 @@ fetch(api_url, {
 .then(result => {               
     if(result.success){
         console.log('adicionei 1 venda!');
+        enviarEmail(form);
         alert('Seu pedido foi registrado, em instantes você receberá um e-mail de confirmação.');
+        checkoutCarrinho(carrinhoId);
+        callback(null, result.success);
+        return result.success;
         
     }else{
-        console.log('erro!');
+        callback(result.error, null);
+        return result.success;
     }
     //document.getElementById("").innerHTML = qtd;
 })

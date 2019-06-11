@@ -8,12 +8,16 @@ import './stylesheet/navbar.scss';
 import './javascript/open-menu.js';
 import { Link } from 'react-router-dom';
 
+//local storage
+var localStorage = require('localStorage');
     
 const icon = (
   <span className="logo">
     Minion<strong>Store</strong>
   </span>
 );
+
+
 
 class Nav extends Component {
     
@@ -27,7 +31,7 @@ class Nav extends Component {
                   <ul className="right hide-on-med-and-down">
                     <li><Link to="/loja">Loja</Link></li>
                     <li><Link to="/perfil">Perfil</Link></li>
-                    <li className="li-cart"><Link to="/carrinho"><span> 1</span><i className="material-icons i-left">add_shopping_cart</i></Link></li>
+                    <li className="li-cart"><Link to="/carrinho"><span> {localStorage.getItem('session_qtd_items')}</span><i className="material-icons i-left">add_shopping_cart</i></Link></li>
                     <li><Link to="/logout">Logout</Link></li>
                   </ul>
                   <ul className="side-nav" id="mobile-demo">

@@ -13,7 +13,6 @@ class Login extends Component {
   render() {
     return (
       <div id="login-container">
-          <Navbar />
           <LoginContent />
           <Footer />
       </div>   
