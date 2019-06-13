@@ -40,7 +40,7 @@ class PerfilContent extends Component {
     loadData = () => {
         console.log('session_userId: ' + localStorage.getItem('session_user_id'));
         //const api = "http://localhost:3000/users/" + localStorage.getItem('session_user_id');
-        const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/users/" + localStorage.getItem('session_user_id');
+        const api = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/users/" + localStorage.getItem('session_user_id');
         fetch(api)
           .then(response => {
             if (response) {
@@ -56,7 +56,7 @@ class PerfilContent extends Component {
     getVendas = () => {
         console.log('userId: ' + localStorage.getItem('session_user_id'));
         //const api_vendas = "http://localhost:3000/vendas/?email=" + localStorage.getItem('session_user_id');
-        const api_vendas = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/vendas/?email=" + localStorage.getItem('session_user_id');
+        const api_vendas = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/vendas/?email=" + localStorage.getItem('session_user_id');
         console.log('url: ' + api_vendas)
         fetch(api_vendas)
           .then(response => {

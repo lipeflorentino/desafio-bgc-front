@@ -7,7 +7,7 @@ export function checkoutCarrinho(carrinhoId) {
     console.log('chamou o checkout carrinho!');    
     //declarando constantes
     //const api_url = 'http://localhost:3000/carrinho/'+ carrinhoId;   
-    const api_url = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/carrinho/" + carrinhoId;
+    const api_url = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/carrinho/" + carrinhoId;
     //fetch api 
     fetch(api_url, { 
         method: 'delete', 

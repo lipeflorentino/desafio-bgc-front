@@ -14,7 +14,7 @@ import './components/stylesheet/cadastro-content.scss';
 import './components/stylesheet/snackbar.scss';
 // Importando img
 import img from './components/img/minions.png';
-const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/users/";
+const api = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/users/";
 //const api = "http://localhost:3000/users/";
 
 

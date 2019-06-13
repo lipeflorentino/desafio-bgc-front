@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch';
 //const api_url = 'http://localhost:3000/vendas/sendmail';     
-const api_url = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/vendas/sendmail";
+const api_url = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/vendas/sendmail";
 
 export function enviarEmail(form) {
     console.log('chamou enviarEmail pelo react...');

@@ -21,7 +21,7 @@ import img from './img/minion-bob.jpg';
 //local storage
 var localStorage = require('localStorage');
 
-const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/minions/";
+const api = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/minions/";
 //const api = "http://localhost:3000/minions/";
 
 class LojaContent extends Component {
