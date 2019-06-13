@@ -59,7 +59,9 @@ p.p-cadastro{
     border: none;
     color:white;
     background-color:$dark-gray;
+    z-index:3;
 }
 .btn-logout:hover{
     background-color:$light-gray;
+    color:yellow;
 }

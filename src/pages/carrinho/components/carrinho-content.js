@@ -27,7 +27,7 @@ var localStorage = require('localStorage');
 const session_carrinho_id = localStorage.getItem('session_carrinho_id');
 const session_user_email = localStorage.getItem('session_user_id');
 const session_user_name = localStorage.getItem('session_user_name');
-const api = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/carrino/";
+const api = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/carrinho/" + session_carrinho_id;
 //const api = "http://localhost:3000/get_items_carrinho/" + session_carrinho_id;
 
 

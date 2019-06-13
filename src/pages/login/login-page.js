@@ -78,7 +78,6 @@ class Login extends Component {
               });
           }
       });
-      this.props.history.push("/perfil");
     } catch (e) {
       alert(e.message);
       this.setState({ isLoading: false });

@@ -40,7 +40,6 @@ class App extends Component {
   
     this.userHasAuthenticated(false);
     localStorage.clear();
-    this.props.history.push("/login");
   }
   
   render() {
@@ -53,7 +52,9 @@ class App extends Component {
     return (
       !this.state.isAuthenticating &&
       <div className="app-container">
-        <button type="submit" onClick={this.handleLogout} className="btn-logout">Logout</button>
+        { this.state.isAuthenticated &&
+          <button type="submit" onClick={this.handleLogout} className="btn-logout">Logout</button> 
+        }
         <Routes childProps={childProps} />
       </div>
       

@@ -38,6 +38,7 @@ class PerfilContent extends Component {
     }
     
     loadData = () => {
+        console.log('entrei aqui!');
         console.log('session_userId: ' + localStorage.getItem('session_user_id'));
         //const api = "http://localhost:3000/users/" + localStorage.getItem('session_user_id');
         const api = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/users/" + localStorage.getItem('session_user_id');
