@@ -13,12 +13,8 @@ import './stylesheet/perfil-content.scss';
 import img from './img/user.png';
 // localstorage
 var localStorage = require('localStorage');
-//implementar getUserId da session
-const session_user_id = localStorage.getItem("session_user_id");
-const session_user_email = localStorage.getItem("session_user_email");
-//const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/users/" + session_user_id;
-const api = "http://localhost:3000/users/" + session_user_id;
-const api_vendas = "http://localhost:3000/vendas/?email=" + session_user_email;
+console.log('userId: ' + localStorage.getItem('session_user_id'));
+
 
 class PerfilContent extends Component {
     
@@ -42,6 +38,9 @@ class PerfilContent extends Component {
     }
     
     loadData = () => {
+        console.log('session_userId: ' + localStorage.getItem('session_user_id'));
+        //const api = "http://localhost:3000/users/" + localStorage.getItem('session_user_id');
+        const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/users/" + localStorage.getItem('session_user_id');
         fetch(api)
           .then(response => {
             if (response) {
@@ -55,6 +54,10 @@ class PerfilContent extends Component {
     }
     
     getVendas = () => {
+        console.log('userId: ' + localStorage.getItem('session_user_id'));
+        //const api_vendas = "http://localhost:3000/vendas/?email=" + localStorage.getItem('session_user_id');
+        const api_vendas = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/vendas/?email=" + localStorage.getItem('session_user_id');
+        console.log('url: ' + api_vendas)
         fetch(api_vendas)
           .then(response => {
             if (response) {
@@ -69,7 +72,7 @@ class PerfilContent extends Component {
     
     render() {
         const { user, venda, isLoading, error } = this.state;
-        
+        console.log('res: ' + JSON.stringify(venda));
         if (error) {
           return <p>{error.message}</p>;
         }
@@ -89,7 +92,7 @@ class PerfilContent extends Component {
                                 <p><strong>Nome:</strong></p>
                                 <p>{user.nome}</p>
                                 <p><strong>Email:</strong></p> 
-                                <p>{user.email}</p>
+                                <p>{user.userId}</p>
                             </div>
                         </div>
                     </Col> 

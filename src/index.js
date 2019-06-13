@@ -5,27 +5,40 @@ import ReactDOM from 'react-dom';
 // Importando o components
 import 'materialize-css/dist/css/materialize.min.css';
 import App from './App.js';
-import Login from './pages/login/login-page.js';
-import Cadastro from './pages/cadastro/cadastro-page.js';
-import Loja from './pages/loja/loja-page.js';
-import Perfil from './pages/perfil/perfil-page.js';
-import Carrinho from './pages/carrinho/carrinho-page.js';
+import Amplify from "aws-amplify";
+import config from "./config";
 // Impotando react router
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 // Importando o css
 import './index.css';
 
-
+Amplify.configure({
+  Auth: {
+    mandatorySignIn: true,
+    region: config.cognito.REGION,
+    userPoolId: config.cognito.USER_POOL_ID,
+    identityPoolId: config.cognito.IDENTITY_POOL_ID,
+    userPoolWebClientId: config.cognito.APP_CLIENT_ID
+  },
+  Storage: {
+    region: config.s3.REGION,
+    bucket: config.s3.BUCKET,
+    identityPoolId: config.cognito.IDENTITY_POOL_ID
+  },
+  API: {
+    endpoints: [
+      {
+        name: "notes",
+        endpoint: config.apiGateway.URL,
+        region: config.apiGateway.REGION
+      },
+    ]
+  }
+});
 // Renderizando o component APP (com seus sub componenets e etc) em <div id="root"></div> do index.html
 ReactDOM.render(
-    <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
-        <Switch>
-            <Route path="/" exact={true} component={App} />
-            <Route path="/perfil" component={Perfil} />
-            <Route path="/login" component={Login} />
-            <Route path="/cadastro" component={Cadastro} />
-            <Route path="/carrinho" component={Carrinho} />
-            <Route path="/loja" component={Loja} />
-        </Switch>
-    </ BrowserRouter>
-    , document.getElementById('root'));
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
+);

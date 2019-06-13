@@ -2,6 +2,7 @@ $dark-gray:#282c34;
 
 nav .nav-wrapper{
     background-color:transparent;
+    padding-right:50px;
 }
 nav{
     background-color:black;
@@ -21,5 +22,13 @@ nav ul a:hover{
     span{
         float:left;
     }
+}
+.qtd_items_animation{
+    animation:qtd_item_animation 2s;
+}
+@keyframes qtd_item_animation {
+   0%   { color: white; }
+   50%  { color: yellow; }
+   100%  { color: white; }
 }
 

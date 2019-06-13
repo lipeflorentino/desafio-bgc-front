@@ -14,6 +14,7 @@ import { Row, Col } from 'react-materialize';
     
 // Importando css
 import './stylesheet/carrinho-content.scss';
+import '../../../components/snackbar/stylesheet/snackbar.scss';
 // Importando img
 import img from './img/minion-bob.jpg';
 
@@ -24,7 +25,7 @@ import { registraVenda } from './javascript/registra_venda.js';
 var localStorage = require('localStorage');
 //pegando dados do localStorage
 const session_carrinho_id = localStorage.getItem('session_carrinho_id');
-const session_user_email = localStorage.getItem('session_user_email');
+const session_user_email = localStorage.getItem('session_user_id');
 const session_user_name = localStorage.getItem('session_user_name');
 //const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/carrino/";
 const api = "http://localhost:3000/get_items_carrinho/" + session_carrinho_id;
@@ -86,11 +87,22 @@ class CarrinhoContent extends Component {
         registraVenda(param, session_user_email, session_user_name, session_carrinho_id, function(err, res){
             if(err){
                 console.log('err: ' + err);
-                alert('ocorreu um erro!');
+                console.log('err: ' + err);
+                // Get the snackbar DIV
+                var x = document.getElementById("errorbar");
+                // Add the "show" class to DIV
+                x.className = "show";
+                // After 3 seconds, remove the show class from DIV
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
             }else{
                 localStorage.setItem('session_qtd_items', 0);
-                alert('Venda registrada com sucesso!');
-                window.location = '/carrinho';
+                // Get the snackbar DIV
+                var y = document.getElementById("snackbar");
+                // Add the "show" class to DIV
+                y.className = "show";
+                // After 3 seconds, remove the show class from DIV
+                setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
+                setTimeout(function(){ window.location = '/carrinho'; }, 3200);
             }   
         });
         
@@ -117,20 +129,37 @@ class CarrinhoContent extends Component {
                 removeItemCarrinho(result, session_carrinho_id, function(err, res){
                     if(err){
                         console.log('err: ' + err);
-                        alert('ocorreu um erro!');
+                        console.log('err: ' + err);
+                        // Get the snackbar DIV
+                        var x = document.getElementById("errorbar");
+                        // Add the "show" class to DIV
+                        x.className = "show";
+                        // After 3 seconds, remove the show class from DIV
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                     }else{
                         const id = param.itemId;
+                        //esconde o elemento da tela
                         $('#'+id).addClass('hide');
-                        alert('Produto removido do carrinho com sucesso!');
+                        //atualiza o qtd session qtd items
                         const session_qtd_items = localStorage.getItem('session_qtd_items');
                         localStorage.setItem('session_qtd_items', Number(session_qtd_items) - 1);
+                        $('#qtd_items').text(localStorage.getItem('session_qtd_items'));
+                        $('#qtd_items').addClass('qtd_items_animation');
+                        // Get the snackbar DIV
+                        var y = document.getElementById("snackbar");
+                        // Add the "show" class to DIV
+                        y.className = "show";
+                        // After 3 seconds, remove the show class from DIV
+                        setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
+                        //se o carrinho ficar vazio, remove o carrinho vazio
                         if(Number(localStorage.getItem('session_qtd_items')) === 0){
                             removeCarrinhoVazio(session_carrinho_id, function(err, result){
                                 if(err){
                                     console.log('erro ao tentar remover carrinho!');
+                                    setTimeout(function(){ window.location = '/carrinho'; }, 3200);
                                 }else{
                                     console.log('carrinho vazio removido com sucesso!');
-                                    window.location = "/carrinho";        
+                                    setTimeout(function(){ window.location = '/carrinho'; }, 3200);
                                 }
                             });
                             
@@ -168,49 +197,41 @@ class CarrinhoContent extends Component {
             );
         }else{
             if(list){
-                if(Number(localStorage.getItem('session_qtd_items'))>0){
-                    return (
-                        
-                        <div id="carrinho-content">
-                            <h1>Carrinho</h1>
-                            <div className="cc-rect">
-                                {this.renderRedirect()}
-                                <Row>
-                                    {
-                                        list.map((n, key) =>
-                                            <Col s={12} m={3} key={key} id={n.itemId}>
-                                                <div className="cc-box">
-                                                    <h5>{n.nome}</h5>
-                                                    <div className="cc-top-icons">
-                                                        <button onClick={this.deleteClick.bind(this, n)} title="carrinho"><i className="material-icons i-left">delete</i></button>
-                                                        <button title="favoritos"><i className="material-icons i-right">favorite_border</i></button>
-                                                    </div>
-                                                    <img src={img} title="" alt=""></img>
-                                                    <div className="cc-bottom-icons">
-                                                        <div className="cc-price"><i className="material-icons i-left">attach_money</i> <p>{n.preco}</p></div>
-                                                        <span className="badge">{n.qtd} curtidas</span>
-                                                    </div>
-                                                </div>
-                                            </Col>   
-                                        )
-                                    } 
-                                </Row> 
-                            </div> 
-                            <button onClick={this.handleClick.bind(this, list)} className="btn waves-effect waves-light" type="submit" name="action">
-                                Realizar Pedido
-                                <i className="material-icons right">send</i>
-                            </button>
-                        </div>   
-                    );
-                }else{
-                    return (
+                return (
                     
-                        <div id="carrinho-content">
-                            <h1>Carrinho</h1>
-                            <p className="p-vazio">Não há items no carrinho</p>
-                        </div>    
-                    );
-                }
+                    <div id="carrinho-content">
+                        <h1>Carrinho</h1>
+                        <div className="cc-rect">
+                            {this.renderRedirect()}
+                            <Row>
+                                {
+                                    list.map((n, key) =>
+                                        <Col s={12} m={3} key={key} id={n.itemId}>
+                                            <div className="cc-box">
+                                                <h5>{n.nome}</h5>
+                                                <div className="cc-top-icons">
+                                                    <button onClick={this.deleteClick.bind(this, n)} title="carrinho"><i className="material-icons i-left">delete</i></button>
+                                                    <button title="favoritos"><i className="material-icons i-right">favorite_border</i></button>
+                                                </div>
+                                                <img src={img} title="" alt=""></img>
+                                                <div className="cc-bottom-icons">
+                                                    <div className="cc-price"><i className="material-icons i-left">attach_money</i> <p>{n.preco}</p></div>
+                                                    <span className="badge">{n.qtd} curtidas</span>
+                                                </div>
+                                            </div>
+                                        </Col>   
+                                    )
+                                } 
+                            </Row> 
+                        </div> 
+                        <button onClick={this.handleClick.bind(this, list)} className="btn waves-effect waves-light" type="submit" name="action">
+                            Realizar Pedido
+                            <i className="material-icons right">send</i>
+                        </button>
+                        <div id="snackbar">Atualizado com sucesso!</div>
+                        <div id="errorbar">Ops! Ocorreu um erro.</div>
+                    </div>   
+                );
             }else{
                 return (
                     

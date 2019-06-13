@@ -1,7 +1,8 @@
 import fetch from 'cross-fetch';
 
 export function getInfoUsuario(userId, callback) {
-    const api_url = 'http://localhost:3000/users/'+ userId;   
+    //const api_url = 'http://localhost:3000/users/'+ userId;   
+    const api_url = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/users/" + userId;
     //fetch api 
     fetch(api_url)
     .then(response => response.json()) // retorna uma promise

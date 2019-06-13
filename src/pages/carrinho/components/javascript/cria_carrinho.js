@@ -3,10 +3,11 @@ import fetch from 'cross-fetch';
 
 //function para chamar endpoint que cria um carrinho
 export function criaCarrinho(userId, callback) {
-            
+    
 console.log('chamou cria carrinho!');            
 //declarando constantes
-const api_url = 'http://localhost:3000/carrinho/';      
+//const api_url = 'http://localhost:3000/carrinho/';    
+const api_url = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/carrinho/";
 const list = [];
 const item = {"userId": userId, "items_list": list};
 //fetch api 

@@ -7,8 +7,6 @@ import fetch from 'cross-fetch';
 import { Redirect } from 'react-router-dom';
 // Importando os components necessários da lib react-materialize
 
-//import { Link } from 'react-router-dom';
-    
 // Importando css
 import './stylesheet/cadastro-content.scss';
 import './stylesheet/snackbar.scss';

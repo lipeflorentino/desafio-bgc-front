@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
         
 // Importando o components
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 // Importando css
@@ -60,15 +61,13 @@ class LoginContent extends Component {
                     if(err){
                         console.log('carrinho vazio');
                         localStorage.setItem('session_qtd_items', 0);
-                        console.log('qtd_items: ' + localStorage.getItem('session_qtd_items'));
                         window.location = '/perfil';
                     }else{
-                        console.log('result: ' + result);
                         localStorage.setItem('session_qtd_items', result.qtd_items);
-                        console.log(result.qtd_items);
                         console.log('carrinho retornado!');
                         window.location = '/perfil';
                     }
+                    $('#qtd_items').text(localStorage.getItem('session_qtd_items'));
                 });
             }
         });

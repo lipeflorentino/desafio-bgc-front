@@ -4,7 +4,7 @@ $btn-color:#0089ec;
 $btn-sec-color:#b1dcfb;
 
 
-#app-container{
+#home-container{
     background-color: $dark-gray;
     min-height: 100vh;
     display: flex;
@@ -14,10 +14,10 @@ $btn-sec-color:#b1dcfb;
     font-size: calc(10px + 2vmin);
     color: white;
 }
-.app-header{
+.home-header{
     text-align:center;
 }
-.app-logo{
+.home-logo{
     
     height:300px;
 }
@@ -51,15 +51,4 @@ p.p-cadastro{
     a:hover{
         text-decoration:underline;
     }
-}
-.btn-logout{
-    position: absolute;
-    right: 12px;
-    top: 22px;
-    border: none;
-    color:white;
-    background-color:$dark-gray;
-}
-.btn-logout:hover{
-    background-color:$light-gray;
 }

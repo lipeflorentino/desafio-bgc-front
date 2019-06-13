@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
         
 // Importando o components
+import $ from 'jquery';
 import fetch from 'cross-fetch';
 import { Redirect } from 'react-router-dom';
 import { addItemCarrinho } from '../../carrinho/components/javascript/add_item_carrinho.js';
@@ -13,15 +14,15 @@ import { Row, Col } from 'react-materialize';
     
 // Importando css
 import './stylesheet/loja-content.scss';
+import '../../../components/snackbar/stylesheet/snackbar.scss';
 // Importando img
 import img from './img/minion-bob.jpg';
 
 //local storage
 var localStorage = require('localStorage');
 
-console.log('qtd: ' + localStorage.getItem('session_qtd_items'));
-//const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/minions/";
-const api = "http://localhost:3000/minions/";
+const api = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/minions/";
+//const api = "http://localhost:3000/minions/";
 
 class LojaContent extends Component {
     
@@ -35,7 +36,7 @@ class LojaContent extends Component {
             isLoading: false,
             error: null,
         };
-        this.handleClick = this.handleClick.bind(this);
+        this.addClick = this.addClick.bind(this);
     }
     
     //setando estado carregando e chamando function para pegar dados da api
@@ -73,13 +74,13 @@ class LojaContent extends Component {
     }
     
     //funcao para add item no carrinho
-    handleClick(param, event) {
+    addClick(param, event) {
         
         //verifica se o carrinho não está vazio
         const session_carrinho_id = localStorage.getItem('session_carrinho_id');
         const session_qtd_items = localStorage.getItem('session_qtd_items');
         
-        if(Number(session_qtd_items) > 0){
+        if(Number(session_qtd_items) > 0 && session_carrinho_id !== ''){
             console.log('carrinho com items!');
             //pega o carrinho e insere item
             getItemCarrinho(session_carrinho_id, function(err, result){
@@ -96,11 +97,25 @@ class LojaContent extends Component {
                     addItemCarrinho(result, session_carrinho_id, function(err, res){
                         if(err){
                             console.log('err: ' + err);
-                            alert('ocorreu um erro!');
+                            // Get the snackbar DIV
+                            var x = document.getElementById("errorbar");
+                            // Add the "show" class to DIV
+                            x.className = "show";
+                            // After 3 seconds, remove the show class from DIV
+                            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                         }else{
                             const session_qtd_items = localStorage.getItem('session_qtd_items');
                             localStorage.setItem('session_qtd_items', Number(session_qtd_items) + 1);
-                            alert('Produto adicionado ao carrinho com sucesso!');
+                            $('#qtd_items').text(localStorage.getItem('session_qtd_items'));
+                            $('#qtd_items').addClass('qtd_items_animation');
+                            // Get the snackbar DIV
+                            var y = document.getElementById("snackbar");
+                            // Add the "show" class to DIV
+                            y.className = "show";
+                            // After 3 seconds, remove the show class from DIV
+                            setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
+                            setTimeout(function(){ window.location = '/loja'; }, 3200);
+                            
                         }   
                     });    
                 }
@@ -108,37 +123,58 @@ class LojaContent extends Component {
             
             
         }else{
-            //criar carrinho e insere item
-            console.log('carrinho vazio!');
-            //criar um novo carrinho
-            const session_user_id = localStorage.getItem('session_user_id');
-            criaCarrinho(session_user_id, function(err, result){
-                if(err){
-                    console.log('err: ' + err);
-                    alert('ocorreu um erro!');    
-                }else{
-                    console.log('carrinho criado com sucesso!');
-                    console.log('res: ' + result)
-                    //setando id do item
-                    const itemId = String(result.data.carrinhoId + "-" + 0);
-                    //atualizando item com o itemId
-                    var item = [{"minionId": param.minionId,"preco":param.preco,"qtd":param.qtd,"nome":param.nome,"descricao":param.descricao, "itemId":itemId}];
-                    //adicionando a lista no carrinho
-                    addItemCarrinho(item, session_carrinho_id, function(err, res){
-                        if(err){
-                            console.log('err: ' + err);
-                            alert('ocorreu um erro!');
-                        }else{
-                            alert('Produto adicionado ao carrinho com sucesso!');
-                            const session_qtd_items = localStorage.getItem('session_qtd_items');
-                            localStorage.setItem('session_qtd_items', Number(session_qtd_items) + 1);
-                        }   
-                    });
-                }
-            });
+            if(localStorage.getItem('session_user_id') && localStorage.getItem('session_user_id')!==''){
+                //criar carrinho e insere item
+                console.log('carrinho vazio!');
+                //criar um novo carrinho
+                const session_user_id = localStorage.getItem('session_user_id');
+                criaCarrinho(session_user_id, function(err, result){
+                    if(err){
+                        console.log('err: ' + err);
+                        alert('ocorreu um erro!');    
+                    }else{
+                        console.log('carrinho criado com sucesso!');
+                        //setando id do item
+                        const itemId = String(result.data.carrinhoId + "-" + 1);
+                        //atualizando item com o itemId
+                        var item = [{"minionId": param.minionId,"preco":param.preco,"qtd":param.qtd,"nome":param.nome,"descricao":param.descricao, "itemId":itemId}];
+                        //atualizando session carrinho id
+                        localStorage.setItem('session_carrinho_id', result.data.carrinhoId);
+                        const session_carrinho_id = localStorage.getItem('session_carrinho_id');
+                        
+                        //adicionando a lista no carrinho
+                        addItemCarrinho(item, session_carrinho_id, function(err, res){
+                            if(err){
+                                console.log('err: ' + err);
+                                // Get the snackbar DIV
+                                var x = document.getElementById("errorbar");
+                                // Add the "show" class to DIV
+                                x.className = "show";
+                                // After 3 seconds, remove the show class from DIV
+                                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }else{
+                                //atualizando a session qtd items
+                                const session_qtd_items = localStorage.getItem('session_qtd_items');
+                                localStorage.setItem('session_qtd_items', Number(session_qtd_items) + 1);
+                                $('#qtd_items').text(localStorage.getItem('session_qtd_items'));
+                                $('#qtd_items').addClass('qtd_items_animation');
+                                // Get the snackbar DIV
+                                var y = document.getElementById("snackbar");
+                                // Add the "show" class to DIV
+                                y.className = "show";
+                                // After 3 seconds, remove the show class from DIV
+                                setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
+                                setTimeout(function(){ window.location = '/loja'; }, 3200);
+                            }   
+                        });
+                    }
+                });
+            }    
         }
         
     }
+    
+    
     
     render() {
         
@@ -166,7 +202,7 @@ class LojaContent extends Component {
                                         {this.renderRedirect()}
                                         <h5>{n.nome}</h5>
                                         <div className="lc-top-icons">
-                                            <button onClick={this.handleClick.bind(this, n)} title="carrinho"><i className="material-icons i-left">add_shopping_cart</i></button>
+                                            <button onClick={this.addClick.bind(this, n)} title="carrinho"><i className="material-icons i-left">add_shopping_cart</i></button>
                                             <button title="favoritos"><i className="material-icons i-right">favorite_border</i></button>
                                         </div>
                                         <img src={img} title="" alt=""></img>
@@ -179,8 +215,11 @@ class LojaContent extends Component {
                             )
                         }
                     </Row> 
-                </div>    
+                </div>
+                <div id="snackbar">Atualizado com sucesso!</div>
+                <div id="errorbar">Ops! Ocorreu um erro.</div>
             </div>   
+            
         );
     }
 }

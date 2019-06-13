@@ -6,7 +6,8 @@ export function getItemCarrinho(session_carrinho_id, callback) {
             
 console.log('chamou get item carrinho!');            
 //declarando constantes
-const api_url = 'http://localhost:3000/get_items_carrinho/' + session_carrinho_id;      
+//const api_url = 'http://localhost:3000/get_items_carrinho/' + session_carrinho_id;   
+const api_url = "https://t9wyd7u0o1.execute-api.us-east-1.amazonaws.com/dev/get_items_carrinho/" + session_carrinho_id;
 
 //fetch api 
 fetch(api_url)
