@@ -55,7 +55,7 @@ class LojaContent extends Component {
     }
     renderRedirect = () => {
         if (this.state.redirect) {
-          return <Redirect to='/perfil' />;
+          return <Redirect to='/loja' />;
         }
     }
     
@@ -114,7 +114,7 @@ class LojaContent extends Component {
                             y.className = "show";
                             // After 3 seconds, remove the show class from DIV
                             setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
-                            setTimeout(function(){ window.location = '/loja'; }, 3200);
+                            setTimeout(function(){ window.location.reload(); }, 3200);
                             
                         }   
                     });    
@@ -164,7 +164,7 @@ class LojaContent extends Component {
                                 y.className = "show";
                                 // After 3 seconds, remove the show class from DIV
                                 setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
-                                setTimeout(function(){ window.location = '/loja'; }, 3200);
+                                setTimeout(function(){ window.location.reload(); }, 3200);
                             }   
                         });
                     }

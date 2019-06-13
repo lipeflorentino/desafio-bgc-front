@@ -102,7 +102,7 @@ class CarrinhoContent extends Component {
                 y.className = "show";
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
-                setTimeout(function(){ window.location = '/carrinho'; }, 3200);
+                setTimeout(function(){ window.location.reload(); }, 3200);
             }   
         });
         
@@ -156,10 +156,10 @@ class CarrinhoContent extends Component {
                             removeCarrinhoVazio(session_carrinho_id, function(err, result){
                                 if(err){
                                     console.log('erro ao tentar remover carrinho!');
-                                    setTimeout(function(){ window.location = '/carrinho'; }, 3200);
+                                    setTimeout(function(){ window.location.reload(); }, 3200);
                                 }else{
                                     console.log('carrinho vazio removido com sucesso!');
-                                    setTimeout(function(){ window.location = '/carrinho'; }, 3200);
+                                    setTimeout(function(){ window.location.reload(); }, 3200);
                                 }
                             });
                             
