@@ -57,7 +57,7 @@ class PerfilContent extends Component {
     getVendas = () => {
         console.log('userId: ' + localStorage.getItem('session_user_id'));
         //const api_vendas = "http://localhost:3000/vendas/" + localStorage.getItem('session_user_id');
-        const api_vendas = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/vendas/?email=" + localStorage.getItem('session_user_id');
+        const api_vendas = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/vendas/" + localStorage.getItem('session_user_id');
         fetch(api_vendas)
           .then(response => {
             if (response) {
@@ -96,6 +96,17 @@ class PerfilContent extends Component {
                             </div>
                         </div>
                     </Col> 
+                    {!venda.success &&
+                     <Row>
+                        <Col s={12} m={12}>
+                            <div className="pc-tables">
+                                <h1>Registros</h1>
+                                <p><strong>Não há resgistros de vendas.</strong></p>
+                            </div>
+                        </Col>            
+                    </Row>   
+                    }
+                    {venda.success &&
                     <Col s={12} m={12}>
                         <div className="pc-tables">
                             <h1>Registros</h1>
@@ -111,7 +122,7 @@ class PerfilContent extends Component {
                         
                                 <tbody>
                                     {
-                                        venda.map((n, key) =>
+                                        venda.vendas.map((n, key) =>
                                           <tr key={key}>
                                             <td>{n.data_venda}</td>
                                             <td>{n.qtd_items}</td>
@@ -124,6 +135,7 @@ class PerfilContent extends Component {
                               </table>    
                         </div>
                     </Col>    
+                    }
                     <Col s={12} m={12}>
                         <div className="pc-favoritos">
                             
@@ -132,6 +144,8 @@ class PerfilContent extends Component {
                 </Row>    
             </div>   
         );
+    
+        
     }
 }
 
