@@ -23,26 +23,29 @@ class Nav extends Component {
     
     render() {
         return (
-            <div className="navbar">
-              <nav>
-                <div className="nav-wrapper">
-                  <a href="/" className="brand-logo">{icon}</a>
-                  <a href="#1" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
-                  <ul className="right hide-on-med-and-down">
-                    <li><Link to="/loja">Loja</Link></li>
-                    <li><Link to="/perfil">Perfil</Link></li>
-                    <li className="li-cart"><Link to="/carrinho"><span id="qtd_items"> {localStorage.getItem('session_qtd_items')}</span><i className="material-icons i-left">add_shopping_cart</i></Link></li>
-                    <li></li>
-                  </ul>
-                  <ul className="side-nav" id="mobile-demo">
-                    <li><Link to="/loja">Loja</Link></li>
-                    <li><Link to="/perfil">Perfil</Link></li>
-                    <li><Link to="/carrinho">Carrinho</Link></li>
-                    <li><Link to="/logout">Logout</Link></li>
-                  </ul>
-                </div>
-              </nav>
+          
+          <div className="nav">
+            <input type="checkbox" id="nav-check"></input>
+            <div className="nav-header">
+              <div className="nav-title">
+                <a href="/" className="brand-logo">{icon}</a>
+              </div>
             </div>
+            <div className="nav-btn">
+              <label htmlFor="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+              </label>
+            </div>
+            
+            <div className="nav-links">
+              <Link to="/loja">Loja</Link>
+              <Link to="/perfil">Perfil</Link>
+              <Link to="/carrinho"><span id="qtd_items"> {localStorage.getItem('session_qtd_items')}</span><i className="material-icons i-left">add_shopping_cart</i></Link>
+            </div>
+          </div>
+            
         );
     }    
 }  

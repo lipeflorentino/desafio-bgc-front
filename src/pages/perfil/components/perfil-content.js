@@ -56,9 +56,8 @@ class PerfilContent extends Component {
     
     getVendas = () => {
         console.log('userId: ' + localStorage.getItem('session_user_id'));
-        //const api_vendas = "http://localhost:3000/vendas/?email=" + localStorage.getItem('session_user_id');
-        const api_vendas = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/vendas/?email=" + localStorage.getItem('session_user_id');
-        console.log('url: ' + api_vendas)
+        const api_vendas = "http://localhost:3000/vendas/" + localStorage.getItem('session_user_id');
+        //const api_vendas = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/vendas/?email=" + localStorage.getItem('session_user_id');
         fetch(api_vendas)
           .then(response => {
             if (response) {
@@ -67,7 +66,7 @@ class PerfilContent extends Component {
               throw new Error('Something went wrong ...');
             }
           })
-          .then(data => this.setState({ venda: data.Vendas, isLoading: false  }))
+          .then(data => this.setState({ venda: data, isLoading: false  }))
           .catch(error => this.setState({ error, isLoading: false }));
     }
     

@@ -5,7 +5,7 @@ import { enviarEmail } from './enviar_email.js';
 //importando funcao para fazer o checkout do carrinho
 import { checkoutCarrinho } from './checkout_carrinho.js';
 //function para chamar endpoint que registra venda
-export function registraVenda(list, email, nome, carrinhoId, callback) {
+export function registraVenda(list, email, nome_user, carrinhoId, callback) {
             
 console.log('chamou registra venda!');            
 //declarando constantes
@@ -28,7 +28,7 @@ for (i; i < list.length; ++i) {
 }
 
 //setando dados para o body da requisicao
-const form = {'email': email, 'nome': nome, 'data_venda': data_venda, 'qtd_items': qtd_items, 'nome_items': nome_items, 'valor_total': valor_total};
+const form = {'email': email, 'nome': nome_user, 'data_venda': data_venda, 'qtd_items': qtd_items, 'nome_items': nome_items, 'valor_total': valor_total};
 console.log('form: ' + JSON.stringify(form));
 //fetch api 
 fetch(api_url, { 

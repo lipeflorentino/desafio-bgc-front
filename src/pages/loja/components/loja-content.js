@@ -35,6 +35,7 @@ class LojaContent extends Component {
             minions: [],
             isLoading: false,
             error: null,
+            redirect: false,
         };
         this.addClick = this.addClick.bind(this);
     }
@@ -45,9 +46,6 @@ class LojaContent extends Component {
         this.loadData();
     }
     
-    state = {
-        redirect: false
-    }
     setRedirect = () => {
         this.setState({
           redirect: true
@@ -57,6 +55,10 @@ class LojaContent extends Component {
         if (this.state.redirect) {
           return <Redirect to='/loja' />;
         }
+    }
+    
+    chamaRedirect = () => {
+        this.setRedirect();
     }
     
     loadData = () => {
@@ -114,7 +116,7 @@ class LojaContent extends Component {
                             y.className = "show";
                             // After 3 seconds, remove the show class from DIV
                             setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
-                            setTimeout(function(){ window.location.reload(); }, 3200);
+                            setTimeout(function(){ document.location.reload(); }, 3200);
                             
                         }   
                     });    
@@ -164,13 +166,17 @@ class LojaContent extends Component {
                                 y.className = "show";
                                 // After 3 seconds, remove the show class from DIV
                                 setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
-                                setTimeout(function(){ window.location.reload(); }, 3200);
+                                setTimeout(function(){ document.location.reload(); }, 3200);
                             }   
                         });
                     }
                 });
             }    
         }
+        if(this.finished){
+            this.setRedirect();
+        }
+        
         
     }
     

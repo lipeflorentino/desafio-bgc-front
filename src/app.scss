@@ -53,15 +53,22 @@ p.p-cadastro{
     }
 }
 .btn-logout{
+    padding: 4px;
     position: absolute;
     right: 12px;
-    top: 22px;
+    top: 14px;
     border: none;
-    color:white;
-    background-color:$dark-gray;
-    z-index:3;
+    color: white;
+    background-color: #282c34;
+    z-index: 3;
 }
 .btn-logout:hover{
     background-color:$light-gray;
     color:yellow;
+}
+
+@media (max-width:600px) {
+    .btn-logout{
+        top:56px;
+    }
 }
