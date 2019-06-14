@@ -67,3 +67,12 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
 .input-field{
     margin-bottom:5px;
 }
+
+
+@media (max-width:600px) {
+    #cadastro-content {
+        width: 100%;
+        margin: 0 auto;
+        padding: 4%;
+    }
+}

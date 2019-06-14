@@ -71,3 +71,14 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
         text-decoration:underline;
     }
 }
+
+@media (max-width:600px) {
+    #login-content{
+         width:100%;
+         margin:0 auto;
+         padding:4%;
+         img{
+             height:160px;
+         }
+    }
+}

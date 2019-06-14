@@ -58,6 +58,10 @@ strong{
 }
 
 @media (max-width:600px) {
+    
+    .nav-links > a .i-left{
+        position: relative;
+    }
   .nav > .nav-btn {
     display: inline-block;
     position: absolute;
