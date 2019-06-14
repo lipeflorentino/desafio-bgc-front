@@ -96,7 +96,7 @@ class PerfilContent extends Component {
                             </div>
                         </div>
                     </Col> 
-                    {!venda.success &&
+                    {venda.success===false &&
                      <Row>
                         <Col s={12} m={12}>
                             <div className="pc-tables">
@@ -106,7 +106,7 @@ class PerfilContent extends Component {
                         </Col>            
                     </Row>   
                     }
-                    {venda.success &&
+                    {venda.success===true &&
                     <Col s={12} m={12}>
                         <div className="pc-tables">
                             <h1>Registros</h1>
