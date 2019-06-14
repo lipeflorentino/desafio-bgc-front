@@ -56,8 +56,8 @@ class PerfilContent extends Component {
     
     getVendas = () => {
         console.log('userId: ' + localStorage.getItem('session_user_id'));
-        const api_vendas = "http://localhost:3000/vendas/" + localStorage.getItem('session_user_id');
-        //const api_vendas = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/vendas/?email=" + localStorage.getItem('session_user_id');
+        //const api_vendas = "http://localhost:3000/vendas/" + localStorage.getItem('session_user_id');
+        const api_vendas = "https://v6bkv4iee2.execute-api.us-east-1.amazonaws.com/dev/vendas/?email=" + localStorage.getItem('session_user_id');
         fetch(api_vendas)
           .then(response => {
             if (response) {
