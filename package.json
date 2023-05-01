@@ -6,7 +6,7 @@
     "aws-amplify": "^1.1.28",
     "babel-preset-env": "^1.7.0",
     "cross-fetch": "^3.0.3",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "local-storage": "^2.0.0",
     "localStorage": "^1.0.4",
     "materialize-css": "^1.0.0-rc.2",
